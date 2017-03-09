@@ -1,0 +1,1 @@
+powershell .\vagrant.ps1
