@@ -1,3 +1,5 @@
+[Array] $List = @()
+
 Class VagrantInstance
 {
     [Int] $Id
@@ -130,18 +132,17 @@ function OutputTable([Array] $tbl)
 
 function GetVagrantInstances()
 {
+    [Array] $List = @()
     $vagrants = vagrant global-status | select-string -Pattern "default" -SimpleMatch
     $count = 0
 
     ForEach ($v in $vagrants) 
     {
-        $i = New-Object VagrantInstance($count, $v.ToString())
-        $List += $i
+        $List += New-Object VagrantInstance($count, $v.ToString())
         $count++
     }
 
     return $List
 }
 
-[Array] $List
 Main
